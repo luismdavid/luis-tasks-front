@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="pinTask()">
+        <ion-icon slot="icon-only" [name]="form.value.pinned ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-spinner *ngIf="loading"></ion-spinner>
+    <form [formGroup]="form" *ngIf="!loading">
+      <ion-item>
+        <ion-input placeholder="Titulo" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-textarea formControlName="content"></ion-textarea>
+      <ion-chip *ngFor="let tag of currentTask?.tags">
+        <ion-label>{{ tag }}</ion-label>
+      </ion-chip>
+      <ion-button (click)="addingTag = true">Agregar etiqueta</ion-button>
+      <ion-item *ngIf="addingTag">
+        <ion-label position="floating">Nueva etiqueta</ion-label>
+        <ion-input #tagInput></ion-input>
+        <ion-button slot="end" (click)="addTag(tagInput.value); tagInput.value = '';" >
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </form>
+  </ion-grid>
+  <ion-item>
+  </ion-item>
+</ion-content>

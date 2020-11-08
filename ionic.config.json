@@ -1,0 +1,7 @@
+{
+  "name": "luis-tasks-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

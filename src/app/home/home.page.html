@@ -1,0 +1,57 @@
+<ion-header style="background-color: white;">
+  <ion-toolbar>
+    <ion-title> Dashboard </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="openCreateTask()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar
+    showCancelButton="always"
+    cancelButtonIcon="close"
+    mode="ios"
+    (ionChange)="search($event)"
+  ></ion-searchbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <ng-container *ngIf="!loading">
+    <div cdkDropList class="example-list" (cdkDropListDropped)="reorder($event)">
+      <ng-container *ngIf="filteredTasks.length === 0">
+        <div
+          class="ion-padding example-box"
+          *ngFor="let task of tasks"
+          (click)="openTask(task._id)"
+          cdkDrag
+          [cdkDragStartDelay]="1000"
+        >
+          <ion-icon *ngIf="task.pinned" name="heart"></ion-icon>
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.content }}</p>
+          <ion-chip *ngFor="let tag of task.tags"
+            ><ion-label>{{ tag }}</ion-label></ion-chip
+          >
+        </div>
+      </ng-container>
+      <ng-container *ngIf="filteredTasks.length !== 0">
+        <div
+          class="ion-padding example-box"
+          *ngFor="let task of filteredTasks"
+          (click)="openTask(task._id)"
+          cdkDrag
+          [cdkDragStartDelay]="1000"
+        >
+          <ion-icon *ngIf="task.pinned" name="heart"></ion-icon>
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.content }}</p>
+          <ion-chip *ngFor="let tag of task.tags"
+            ><ion-label>{{ tag }}</ion-label></ion-chip
+          >
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  
+</ion-content>

@@ -1,0 +1,13 @@
+{
+  "appId": "io.luis-tasks.front",
+  "appName": "luis-tasks-front",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
