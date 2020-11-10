@@ -23,7 +23,10 @@ export class TaskService {
   searchCurrentUserTasks() {
     return this.auth.subUser().pipe(
       filter(user => !!user),
-      switchMap(user => this.http.get<TaskModel[]>(environment.API + '/tasks?userId=' + user._id)),
+      switchMap(user => {
+        console.log(user);
+        return this.http.get<TaskModel[]>(environment.API + '/tasks?userId=' + user._id)
+      }),
       first()
     );
   }
